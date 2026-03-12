@@ -7,26 +7,35 @@ import base64
 # Tải dữ liệu chim cánh cụt
 penguins = sns.load_dataset("penguins")
 
-# Đếm số lượng theo giới tính
-gioi_tinh = penguins["sex"].value_counts()
+# Đổi giới tính sang tiếng Việt
+penguins["Giới_tính"] = penguins["sex"].map({
+    "Male": "Con đực",
+    "Female": "Con cái"
+})
 
-labels = ["Con đực", "Con cái"]
-values = gioi_tinh.values
+# Tạo figure
+fig = plt.figure(figsize=(6,4), facecolor='white')
 
-fig = plt.figure(figsize=(5,4), facecolor='white')
+# Vẽ biểu đồ violin
+sns.violinplot(
+    data=penguins,
+    x="Giới_tính",
+    y="body_mass_g",
+    palette=["#6A5ACD", "#FF69B4"]
+)
 
-mau = ["#6A5ACD", "#FF69B4"]
-
-plt.pie(values, labels=labels, autopct='%1.1f%%', colors=mau, startangle=90)
-plt.title("Tỷ lệ giới tính của chim cánh cụt")
-
-plt.axis("equal")
+plt.xlabel("Giới tính")
+plt.ylabel("Khối lượng cơ thể (gram)")
+plt.title("Phân bố khối lượng cơ thể chim cánh cụt theo giới tính")
 
 plt.tight_layout()
 
 data = io.BytesIO()
 plt.savefig(data, bbox_inches='tight')
+
 image = f"data:image/png;base64,{base64.b64encode(data.getvalue()).decode()}"
-alt = "Biểu đồ giới tính chim cánh cụt"
+alt = "Biểu đồ khối lượng cơ thể chim cánh cụt"
+
 display.display(display.Markdown(f"""![{alt}]({image})"""))
+
 plt.close(fig)
