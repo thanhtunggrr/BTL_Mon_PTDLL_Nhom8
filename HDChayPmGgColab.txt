@@ -1,0 +1,58 @@
+Hướng dẫn chạy project trên Google Colab
+Bước 1: Mở Google Colab
+Truy cập trang:
+ https://colab.research.google.com
+Đăng nhập bằng tài khoản Google.
+Bước 2: Mở notebook từ GitHub
+1. Chọn File
+
+2. Chọn Open notebook
+
+3. Chọn tab GitHub
+
+4. Dán link repository GitHub của project
+
+5. Chọn file .ipynb hoặc .py
+
+Bước 3: Cài đặt thư viện cần thiết
+Trước khi chạy chương trình cần cài đặt các thư viện.
+Chạy cell sau:
+!pip install pandas
+!pip install numpy
+!pip install matplotlib
+!pip install seaborn
+Các thư viện được sử dụng:
+   * pandas → xử lý dữ liệu
+
+   * numpy → tính toán số học
+
+   * matplotlib → vẽ biểu đồ
+
+   * seaborn → trực quan hóa dữ liệu
+
+Bước 4: Import các thư viện
+Sau khi cài đặt, chạy đoạn code sau:
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+Bước 5: Tải dataset
+Cách 1: Tải từ GitHub
+url = "link_dataset_trong_github"
+data = pd.read_csv(url)
+data.head()
+
+
+Cách 2: Upload dataset từ máy tính
+from google.colab import files
+uploaded = files.upload()
+Sau đó đọc file:
+data = pd.read_csv("penguins.csv")
+data.head()
+Bước 6: Kiểm tra dữ liệu
+data.info()
+data.describe()
+Kiểm tra dữ liệu bị thiếu:
+data.isnull().sum()
