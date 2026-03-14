@@ -26,28 +26,22 @@ nhiet_do_theo_loai = du_lieu_chim.groupby("species")["Nhiet_do_co_the"].mean()
 print("\nNhiệt độ cơ thể trung bình theo loài:")
 print(nhiet_do_theo_loai)
 
-# 7. Vẽ biểu đồ
+# 7. Chuyển dữ liệu sang dạng bảng để vẽ heatmap
+heatmap_data = nhiet_do_theo_loai.to_frame()
+
+# 8. Vẽ Heatmap
 plt.figure(figsize=(8,5))
 
-mau_sac = ["#6A5ACD", "#20B2AA", "#FF8C00"]
+sns.heatmap(
+    heatmap_data,
+    annot=True,
+    cmap="coolwarm",
+    linewidths=0.5
+)
 
-cot = plt.bar(nhiet_do_theo_loai.index, nhiet_do_theo_loai.values, color=mau_sac)
-
-# Hiển thị giá trị trên cột
-for c in cot:
-    y = c.get_height()
-    plt.text(
-        c.get_x()+c.get_width()/2,
-        y+0.02,
-        round(y,2),
-        ha='center'
-    )
-
-plt.title("Nhiệt độ cơ thể trung bình của các loài chim cánh cụt")
-plt.xlabel("Loài chim cánh cụt")
-plt.ylabel("Nhiệt độ cơ thể (°C)")
-
-plt.grid(axis="y", linestyle="--", alpha=0.5)
+plt.title(" nhiệt độ cơ thể trung bình của các loài chim cánh cụt")
+plt.xlabel("Nhiệt độ cơ thể (°C)")
+plt.ylabel("Loài chim cánh cụt")
 
 plt.tight_layout()
 plt.show()
