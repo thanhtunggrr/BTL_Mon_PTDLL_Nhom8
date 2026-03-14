@@ -18,7 +18,7 @@ nhiet_do_dao = {
 }
 
 # Thêm cột nhiệt độ vào bảng dữ liệu
-du_lieu_chim["Nhiet_do_C"] = du_lieu_chim["island"].map(nhiet_do_dao) 
+du_lieu_chim["Nhiet_do_C"] = du_lieu_chim["island"].map(nhiet_do_dao)
 + np.random.normal(0,1,len(du_lieu_chim))
 
 # 5. Thống kê nhiệt độ
@@ -38,7 +38,7 @@ plt.figure(figsize=(8,5))
 
 mau_sac = ["#4C72B0", "#55A868", "#C44E52"]
 
-cot = plt.bar(nhiet_do_trung_binh.index, nhiet_do_trung_binh.values, 
+cot = plt.bar(nhiet_do_trung_binh.index, nhiet_do_trung_binh.values,
               color=mau_sac)
 
 # Đổi tên hiển thị trục X
